@@ -34,3 +34,10 @@ Single GPU:
 `python tools/train.py 
 configs/recognition/swin/swin_base_patch244_window877_joint.py 
 --cfg-options total_epochs=50 work_dir='new_work_dirs/Joint_pretrain' load_from=swin_base_patch244_window877_kinetics600_22k.pth`
+
+## Model Test
+Once you finish training your model, you can test your model with:
+`bash tools/dist_test.sh 
+configs/recognition/swin/swin_base_patch244_window877_${DATA}.py 
+new_work_dirs/${DATA}_pretrained/best_mean_class_accuracy_epoch* 4 
+--cfg-options data.test.ann_file=data/${DATA}/new_annotations/${DATA}_test.txt --eval top_k_accuracy`
